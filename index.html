@@ -16,6 +16,7 @@
         body, html {
             width: 100%;
             height: 100%;
+            min-height: 100dvh;
             overflow: hidden;
             background-color: #001a33; 
             font-family: 'Mali', cursive;
@@ -27,7 +28,9 @@
         canvas {
             display: block;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
+            position: fixed;
+            inset: 0;
         }
 
         .glass-panel {
@@ -45,7 +48,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100dvh;
             pointer-events: none;
             display: flex;
             flex-direction: column;
@@ -289,6 +292,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            pointer-events: auto;
             background: linear-gradient(135deg, rgba(0,40,70,0.85) 0%, rgba(0,10,25,0.95) 100%);
             padding: 50px 70px;
             border-radius: 30px;
@@ -296,6 +300,13 @@
             box-shadow: 0 0 50px rgba(0, 200, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             animation: floatUI 4s ease-in-out infinite;
+        }
+
+        #start-screen {
+            max-height: 92dvh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         @keyframes floatUI {
@@ -573,6 +584,25 @@
             #mobile-stick-base { width: 132px; height: 132px; }
             #mobile-stick-knob { width: 34px; height: 34px; left: 49px; top: 49px; }
             #mobile-dash-btn { width: 96px; height: 96px; right: 14px; bottom: 18px; font-size: 0.86rem; }
+            #start-screen { width: 94vw; padding: 18px 16px; border-radius: 20px; max-height: 94dvh; }
+            #start-screen h1 { font-size: 2rem; margin-bottom: 10px; }
+            #lobby-message { font-size: 0.92rem; margin-bottom: 8px; }
+            #selected-character-note { font-size: 0.9rem; margin-bottom: 12px; }
+            #start-btn { width: min(72vw, 290px); padding: 12px 20px; }
+        }
+
+        @media (max-height: 760px) {
+            #start-screen {
+                width: min(96vw, 860px);
+                max-height: 96dvh;
+                padding: 14px 14px;
+            }
+            #start-screen h1 { font-size: clamp(1.65rem, 5vw, 2.3rem); margin-bottom: 8px; }
+            #character-preview { margin: 0 0 10px; }
+            #character-preview-canvas { height: 96px; }
+            #character-select { margin: 0 0 10px; }
+            #selected-character-note { margin-bottom: 10px; font-size: 0.9rem; }
+            #start-btn { width: min(80vw, 320px); padding: 10px 14px; }
         }
     </style>
 </head>
@@ -793,6 +823,7 @@
 
         const mouse = { screenX: 0, screenY: 0, worldX: 0, worldY: 0 };
         const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+        const MOBILE_VIEW_SCALE = 0.82;
         const mobileMove = { active: false, dx: 0, dy: 0 };
         let mobileMoveTouchId = null;
         const SOCKET_ENABLED = typeof io !== 'undefined';
@@ -811,6 +842,10 @@
         let startTarget = { x: 0, y: -500 }; 
         let previewPhase = 0;
         const previewPlayers = {};
+
+        function getViewScale() {
+            return (isTouchDevice && gameState === 'PLAYING') ? MOBILE_VIEW_SCALE : 1;
+        }
 
         function resize() {
             width = window.innerWidth;
@@ -917,8 +952,9 @@
             if (gameState !== 'PLAYING' || dashCooldown > 0 || !player) return;
             mouse.screenX = screenX;
             mouse.screenY = screenY;
-            mouse.worldX = mouse.screenX + camera.x;
-            mouse.worldY = mouse.screenY + camera.y;
+            const viewScale = getViewScale();
+            mouse.worldX = mouse.screenX / viewScale + camera.x;
+            mouse.worldY = mouse.screenY / viewScale + camera.y;
 
             const dx = mouse.worldX - player.x;
             const dy = mouse.worldY - player.y;
@@ -974,10 +1010,11 @@
         function updateMobileTarget() {
             if (!isTouchDevice || !mobileMove.active || !player) return;
             const targetDist = 220;
+            const viewScale = getViewScale();
             mouse.worldX = player.x + mobileMove.dx * targetDist;
             mouse.worldY = player.y + mobileMove.dy * targetDist;
-            mouse.screenX = mouse.worldX - camera.x;
-            mouse.screenY = mouse.worldY - camera.y;
+            mouse.screenX = (mouse.worldX - camera.x) * viewScale;
+            mouse.screenY = (mouse.worldY - camera.y) * viewScale;
         }
 
         function updateMobileUiVisibility() {
@@ -1021,8 +1058,9 @@
 
         function runDeathDissolve(onDone) {
             const particles = [];
-            const sx = player.x - camera.x;
-            const sy = player.y - camera.y;
+            const viewScale = getViewScale();
+            const sx = (player.x - camera.x) * viewScale;
+            const sy = (player.y - camera.y) * viewScale;
             for (let i = 0; i < 90; i++) {
                 const a = Math.random() * Math.PI * 2;
                 const sp = 1.4 + Math.random() * 5.4;
@@ -3339,17 +3377,19 @@
                 if(shakeIntensity < 0.5) shakeIntensity = 0;
             }
 
-            camera.x = player.x - width / 2;
-            camera.y = player.y - height / 2;
+            const viewScale = getViewScale();
+            camera.x = player.x - width / (2 * viewScale);
+            camera.y = player.y - height / (2 * viewScale);
 
-            mouse.worldX = mouse.screenX + camera.x;
-            mouse.worldY = mouse.screenY + camera.y;
+            mouse.worldX = mouse.screenX / viewScale + camera.x;
+            mouse.worldY = mouse.screenY / viewScale + camera.y;
             updateMobileTarget();
 
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             drawBackground(ctx, width, height);
 
             ctx.save();
+            ctx.scale(viewScale, viewScale);
             ctx.translate(-camera.x + camShakeX, -camera.y + camShakeY);
 
             drawIceWalls(ctx);
