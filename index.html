@@ -508,6 +508,18 @@
             #mobile-controls { display: none !important; }
         }
 
+        @media (hover: none) and (pointer: coarse) {
+            #minimap-wrap {
+                left: 10px;
+                top: 66px;
+                width: 112px;
+                height: 112px;
+                padding: 5px;
+                border-radius: 12px;
+            }
+            #minimap-canvas { border-radius: 8px; }
+        }
+
         #mobile-left-zone {
             position: absolute;
             left: 16px;
@@ -570,7 +582,7 @@
             #distance-display { font-size: 0.95rem; top: 50px; right: 15px; padding: 8px 12px; }
             #status-display { top: 85px; right: 15px; font-size: 0.9rem; padding: 8px 12px; }
             #remote-pos-display { top: 160px; right: 15px; font-size: 0.78rem; padding: 8px 10px; max-width: 58vw; }
-            #minimap-wrap { left: 15px; top: 72px; width: 132px; height: 132px; padding: 6px; }
+            #minimap-wrap { left: 10px; top: 66px; width: 102px; height: 102px; padding: 5px; }
             #hp-container { width: 200px; top: 15px; }
             #dash-container { width: 140px; top: 38px; }
             #character-select { margin-bottom: 18px; gap: 8px; }
