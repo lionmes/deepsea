@@ -573,6 +573,9 @@
         }
 
         let animationId;
+        let lastFrameTime = 0;
+        let lastStartFrameTime = 0;
+        const FIXED_FRAME_MS = 1000 / 60;
         let gameState = 'START';
         let score = 0;
         let frameCount = 0;
@@ -2618,11 +2621,19 @@
             gameOverScreen.style.display = 'none';
             
             gameState = 'PLAYING';
+            lastFrameTime = 0;
             loop();
         }
 
-        function loop() {
+        function loop(timestamp = performance.now()) {
             if (gameState !== 'PLAYING') return;
+            if (!lastFrameTime) lastFrameTime = timestamp;
+            const elapsed = timestamp - lastFrameTime;
+            if (elapsed < FIXED_FRAME_MS) {
+                animationId = requestAnimationFrame(loop);
+                return;
+            }
+            lastFrameTime = timestamp - (elapsed % FIXED_FRAME_MS);
 
             frameCount++;
 
@@ -3142,8 +3153,15 @@
             startScreenLoop();
         }
 
-        function startScreenLoop() {
+        function startScreenLoop(timestamp = performance.now()) {
             if (gameState !== 'START') return;
+            if (!lastStartFrameTime) lastStartFrameTime = timestamp;
+            const elapsed = timestamp - lastStartFrameTime;
+            if (elapsed < FIXED_FRAME_MS) {
+                requestAnimationFrame(startScreenLoop);
+                return;
+            }
+            lastStartFrameTime = timestamp - (elapsed % FIXED_FRAME_MS);
             frameCount++;
             previewPhase += 0.016;
             
