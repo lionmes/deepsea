@@ -136,6 +136,90 @@
             display: none;
         }
 
+        #settings-btn {
+            position: absolute;
+            top: 20px;
+            left: 210px;
+            z-index: 22;
+            pointer-events: auto;
+            display: none;
+            padding: 8px 14px;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            border: 1px solid rgba(160, 240, 255, 0.55);
+            background: rgba(0, 30, 60, 0.65);
+            color: #e6fbff;
+            cursor: pointer;
+        }
+
+        #settings-menu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            display: none;
+            pointer-events: auto;
+            width: min(340px, 86vw);
+            padding: 18px;
+            text-align: center;
+        }
+
+        #settings-menu h3 {
+            margin-bottom: 14px;
+            font-size: 1.35rem;
+            color: #d8fbff;
+        }
+
+        #settings-menu .btn-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #settings-menu .mini-btn {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(170, 240, 255, 0.55);
+            background: rgba(0, 35, 70, 0.72);
+            color: #ecfcff;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        #minimap-wrap {
+            position: absolute;
+            left: 20px;
+            top: 88px;
+            width: 190px;
+            height: 190px;
+            display: none;
+            z-index: 12;
+            pointer-events: none;
+            padding: 8px;
+        }
+
+        #minimap-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 10px;
+            background: rgba(0, 26, 51, 0.65);
+        }
+
+        #remote-pos-display {
+            position: absolute;
+            top: 210px;
+            right: 20px;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            text-align: right;
+            color: rgba(230, 255, 255, 0.96);
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.45);
+            display: none;
+            max-width: min(38vw, 380px);
+        }
+
         #hp-container {
             position: absolute;
             top: 20px;
@@ -234,6 +318,14 @@
             filter: drop-shadow(0px 0px 15px rgba(0, 255, 255, 0.8));
             margin-bottom: 20px;
             letter-spacing: 3px;
+        }
+
+        #lobby-message {
+            margin: 2px 0 14px;
+            min-height: 1.3em;
+            font-size: 1.05rem;
+            color: #ffd5d5;
+            text-shadow: 0 0 8px rgba(255, 70, 100, 0.35);
         }
 
         .instructions {
@@ -393,14 +485,81 @@
             z-index: 1;
         }
 
+        #mobile-controls {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            pointer-events: none;
+            display: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #mobile-controls { display: none !important; }
+        }
+
+        #mobile-left-zone {
+            position: absolute;
+            left: 16px;
+            bottom: 18px;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: rgba(0, 35, 70, 0.25);
+            border: 1px solid rgba(120, 220, 255, 0.35);
+        }
+
+        #mobile-stick-base {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.14);
+        }
+
+        #mobile-stick-knob {
+            position: absolute;
+            left: 65px;
+            top: 65px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(180, 245, 255, 0.8);
+            box-shadow: 0 0 14px rgba(0, 240, 255, 0.65);
+            transition: left 0.06s linear, top 0.06s linear;
+        }
+
+        #mobile-dash-btn {
+            position: absolute;
+            right: 26px;
+            bottom: 30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 225, 120, 0.8);
+            background: radial-gradient(circle, rgba(255, 210, 60, 0.4), rgba(255, 140, 0, 0.25));
+            box-shadow: 0 0 24px rgba(255, 185, 90, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; }
             p { font-size: 1rem; }
             .btn { font-size: 1.2rem; padding: 12px 30px; }
             #score-display { font-size: 1.2rem; top: 15px; left: 15px; padding: 8px 12px; }
+            #settings-btn { top: 14px; left: 150px; font-size: 0.8rem; padding: 6px 10px; }
             #depth-display { font-size: 1.1rem; top: 15px; right: 15px; padding: 8px 12px; }
             #distance-display { font-size: 0.95rem; top: 50px; right: 15px; padding: 8px 12px; }
             #status-display { top: 85px; right: 15px; font-size: 0.9rem; padding: 8px 12px; }
+            #remote-pos-display { top: 160px; right: 15px; font-size: 0.78rem; padding: 8px 10px; max-width: 58vw; }
+            #minimap-wrap { left: 15px; top: 72px; width: 132px; height: 132px; padding: 6px; }
             #hp-container { width: 200px; top: 15px; }
             #dash-container { width: 140px; top: 38px; }
             #character-select { margin-bottom: 18px; gap: 8px; }
@@ -410,6 +569,10 @@
             .character-card { padding: 10px 12px; }
             .character-name { font-size: 0.98rem; }
             .character-skill { font-size: 0.86rem; }
+            #mobile-left-zone { width: 132px; height: 132px; left: 12px; bottom: 12px; }
+            #mobile-stick-base { width: 132px; height: 132px; }
+            #mobile-stick-knob { width: 34px; height: 34px; left: 49px; top: 49px; }
+            #mobile-dash-btn { width: 96px; height: 96px; right: 14px; bottom: 18px; font-size: 0.86rem; }
         }
     </style>
 </head>
@@ -419,11 +582,23 @@
     
     <div class="vignette"></div>
     <div id="damage-overlay"></div>
+    <div id="mobile-controls">
+        <div id="mobile-left-zone">
+            <div id="mobile-stick-base"></div>
+            <div id="mobile-stick-knob"></div>
+        </div>
+        <div id="mobile-dash-btn">พุ่ง</div>
+    </div>
 
     <div id="score-display" class="glass-panel">คะแนน: 0</div>
+    <button id="settings-btn" class="glass-panel">Setting</button>
     <div id="depth-display" class="glass-panel">ความลึก: 0m</div>
     <div id="distance-display" class="glass-panel">ระยะทางราบ: 0m</div>
     <div id="status-display" class="glass-panel"></div>
+    <div id="remote-pos-display" class="glass-panel"></div>
+    <div id="minimap-wrap" class="glass-panel">
+        <canvas id="minimap-canvas"></canvas>
+    </div>
     
     <div id="hp-container"><div id="hp-fill"></div></div>
     <div id="dash-container"><div id="dash-fill"></div></div>
@@ -431,6 +606,7 @@
     <div id="ui-layer">
         <div id="start-screen">
             <h1>มหาสมุทรไร้ก้นบึ้ง</h1>
+            <div id="lobby-message"></div>
            
             <div id="character-preview" class="glass-panel">
                 <canvas id="character-preview-canvas"></canvas>
@@ -452,7 +628,15 @@
             <button class="btn" id="restart-btn" style="border-color: #ff5252; box-shadow: 0 0 15px rgba(255,0,0,0.2);">ว่ายน้ำอีกครั้ง</button>
         </div>
     </div>
+    <div id="settings-menu" class="glass-panel">
+        <h3>ตั้งค่า</h3>
+        <div class="btn-row">
+            <button id="back-home-btn" class="mini-btn">กลับหน้าหลัก</button>
+            <button id="close-settings-btn" class="mini-btn">ปิด</button>
+        </div>
+    </div>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d', { alpha: false }); 
@@ -460,9 +644,14 @@
         const startScreen = document.getElementById('start-screen');
         const gameOverScreen = document.getElementById('game-over-screen');
         const scoreDisplay = document.getElementById('score-display');
+        const settingsBtn = document.getElementById('settings-btn');
         const depthDisplay = document.getElementById('depth-display');
         const distanceDisplay = document.getElementById('distance-display');
         const statusDisplay = document.getElementById('status-display');
+        const remotePosDisplay = document.getElementById('remote-pos-display');
+        const minimapWrap = document.getElementById('minimap-wrap');
+        const minimapCanvas = document.getElementById('minimap-canvas');
+        const minimapCtx = minimapCanvas.getContext('2d');
         const hpContainer = document.getElementById('hp-container');
         const hpFill = document.getElementById('hp-fill');
         const dashContainer = document.getElementById('dash-container');
@@ -472,6 +661,10 @@
         const finalScoreText = document.getElementById('final-score');
         const startBtn = document.getElementById('start-btn');
         const restartBtn = document.getElementById('restart-btn');
+        const lobbyMessage = document.getElementById('lobby-message');
+        const settingsMenu = document.getElementById('settings-menu');
+        const backHomeBtn = document.getElementById('back-home-btn');
+        const closeSettingsBtn = document.getElementById('close-settings-btn');
         const characterSelect = document.getElementById('character-select');
         const characterTrack = document.getElementById('character-track');
         const characterPrev = document.getElementById('character-prev');
@@ -479,6 +672,10 @@
         const selectedCharacterNote = document.getElementById('selected-character-note');
         const characterPreviewCanvas = document.getElementById('character-preview-canvas');
         const characterPreviewCtx = characterPreviewCanvas.getContext('2d');
+        const mobileControls = document.getElementById('mobile-controls');
+        const mobileLeftZone = document.getElementById('mobile-left-zone');
+        const mobileStickKnob = document.getElementById('mobile-stick-knob');
+        const mobileDashBtn = document.getElementById('mobile-dash-btn');
 
         const CHARACTER_PRESETS = {
             default: {
@@ -573,6 +770,7 @@
         }
 
         let animationId;
+        let deathAnimationId = 0;
         let lastFrameTime = 0;
         let lastStartFrameTime = 0;
         const FIXED_FRAME_MS = 1000 / 60;
@@ -594,6 +792,20 @@
         const MAX_DASH_CD = 65; 
 
         const mouse = { screenX: 0, screenY: 0, worldX: 0, worldY: 0 };
+        const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+        const mobileMove = { active: false, dx: 0, dy: 0 };
+        let mobileMoveTouchId = null;
+        const SOCKET_ENABLED = typeof io !== 'undefined';
+        const NET_TICK_MS = 50;
+        const REMOTE_LERP = 0.25;
+        const BITE_COOLDOWN_FRAMES = 16;
+        let socket = null;
+        let socketId = null;
+        let lastNetSendAt = 0;
+        const remotePlayers = new Map();
+        const remoteRenderPlayers = new Map();
+        const biteCooldownByTarget = new Map();
+        const playerName = `ผู้เล่น-${Math.floor(Math.random() * 900 + 100)}`;
 
         let startEntities = { fishes: [], bubbles: [], sharks: [], jellyfishes: [] };
         let startTarget = { x: 0, y: -500 }; 
@@ -606,6 +818,7 @@
             canvas.width = width;
             canvas.height = height;
             resizeCharacterPreviewCanvas();
+            resizeMinimapCanvas();
         }
         window.addEventListener('resize', resize);
 
@@ -619,6 +832,18 @@
                 characterPreviewCanvas.height = targetH;
             }
             characterPreviewCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function resizeMinimapCanvas() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const rect = minimapCanvas.getBoundingClientRect();
+            const targetW = Math.max(1, Math.round(rect.width * dpr));
+            const targetH = Math.max(1, Math.round(rect.height * dpr));
+            if (minimapCanvas.width !== targetW || minimapCanvas.height !== targetH) {
+                minimapCanvas.width = targetW;
+                minimapCanvas.height = targetH;
+            }
+            minimapCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
         function drawCharacterPreview(t = 0) {
@@ -687,29 +912,220 @@
                 mouse.screenY = e.clientY;
             }
         }
+
+        function tryDashAt(screenX, screenY) {
+            if (gameState !== 'PLAYING' || dashCooldown > 0 || !player) return;
+            mouse.screenX = screenX;
+            mouse.screenY = screenY;
+            mouse.worldX = mouse.screenX + camera.x;
+            mouse.worldY = mouse.screenY + camera.y;
+
+            const dx = mouse.worldX - player.x;
+            const dy = mouse.worldY - player.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist <= 5) return;
+
+            player.dash(dx / dist, dy / dist);
+            applyDashSkill();
+            dashCooldown = MAX_DASH_CD;
+            waveRings.push(new WaveRing(player.x, player.y));
+            triggerShake(5);
+        }
+
+        function tryDashForward() {
+            if (gameState !== 'PLAYING' || dashCooldown > 0 || !player) return;
+            const nx = Math.cos(player.angle || 0);
+            const ny = Math.sin(player.angle || 0);
+            if (!Number.isFinite(nx) || !Number.isFinite(ny)) return;
+            player.dash(nx, ny);
+            applyDashSkill();
+            dashCooldown = MAX_DASH_CD;
+            waveRings.push(new WaveRing(player.x, player.y));
+            triggerShake(5);
+        }
+
+        function resetMobileStick() {
+            mobileMove.active = false;
+            mobileMove.dx = 0;
+            mobileMove.dy = 0;
+            mobileMoveTouchId = null;
+            mobileStickKnob.style.left = mobileLeftZone.clientWidth / 2 - mobileStickKnob.clientWidth / 2 + 'px';
+            mobileStickKnob.style.top = mobileLeftZone.clientHeight / 2 - mobileStickKnob.clientHeight / 2 + 'px';
+        }
+
+        function updateMobileStickFromPoint(clientX, clientY) {
+            const rect = mobileLeftZone.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = clientX - cx;
+            const dy = clientY - cy;
+            const radius = rect.width * 0.38;
+            const dist = Math.hypot(dx, dy) || 1;
+            const clamped = Math.min(radius, dist);
+            const nx = (dx / dist) * clamped;
+            const ny = (dy / dist) * clamped;
+            mobileMove.dx = nx / radius;
+            mobileMove.dy = ny / radius;
+            mobileMove.active = true;
+            mobileStickKnob.style.left = rect.width / 2 + nx - mobileStickKnob.clientWidth / 2 + 'px';
+            mobileStickKnob.style.top = rect.height / 2 + ny - mobileStickKnob.clientHeight / 2 + 'px';
+        }
+
+        function updateMobileTarget() {
+            if (!isTouchDevice || !mobileMove.active || !player) return;
+            const targetDist = 220;
+            mouse.worldX = player.x + mobileMove.dx * targetDist;
+            mouse.worldY = player.y + mobileMove.dy * targetDist;
+            mouse.screenX = mouse.worldX - camera.x;
+            mouse.screenY = mouse.worldY - camera.y;
+        }
+
+        function updateMobileUiVisibility() {
+            mobileControls.style.display = (isTouchDevice && gameState === 'PLAYING') ? 'block' : 'none';
+        }
+
+        function setPlayingHudVisibility(visible) {
+            const v = visible ? 'block' : 'none';
+            scoreDisplay.style.display = v;
+            settingsBtn.style.display = v;
+            depthDisplay.style.display = v;
+            distanceDisplay.style.display = v;
+            hpContainer.style.display = v;
+            dashContainer.style.display = v;
+            minimapWrap.style.display = v;
+            if (!visible) {
+                statusDisplay.style.display = 'none';
+                remotePosDisplay.style.display = 'none';
+            }
+        }
+
+        function showMainLobby(fromDeath = false) {
+            gameState = 'START';
+            cancelAnimationFrame(animationId);
+            if (deathAnimationId) cancelAnimationFrame(deathAnimationId);
+            deathAnimationId = 0;
+            if (socket && socket.connected) socket.emit('player:status', { active: false });
+
+            setPlayingHudVisibility(false);
+            settingsMenu.style.display = 'none';
+            gameOverScreen.style.display = 'none';
+            startScreen.style.display = 'flex';
+            startBtn.textContent = fromDeath ? 'เกิดใหม่' : 'เริ่มดำดิ่ง';
+            lobbyMessage.textContent = fromDeath
+                ? `คุณตายแล้ว (${score} คะแนน) เลือกตัวใหม่แล้วลุยต่อ`
+                : '';
+            gameOverTitle.textContent = 'วิญญาณแตกสลาย';
+            updateMobileUiVisibility();
+            initStartScreen();
+        }
+
+        function runDeathDissolve(onDone) {
+            const particles = [];
+            const sx = player.x - camera.x;
+            const sy = player.y - camera.y;
+            for (let i = 0; i < 90; i++) {
+                const a = Math.random() * Math.PI * 2;
+                const sp = 1.4 + Math.random() * 5.4;
+                particles.push({
+                    x: sx,
+                    y: sy,
+                    vx: Math.cos(a) * sp,
+                    vy: Math.sin(a) * sp,
+                    r: 1.8 + Math.random() * 4,
+                    life: 1
+                });
+            }
+
+            const start = performance.now();
+            const duration = 750;
+            const step = (now) => {
+                const t = Math.min(1, (now - start) / duration);
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.fillStyle = `rgba(0, 10, 22, ${0.18 + t * 0.45})`;
+                ctx.fillRect(0, 0, width, height);
+
+                ctx.save();
+                ctx.globalCompositeOperation = 'screen';
+                particles.forEach((p) => {
+                    p.vx *= 0.98;
+                    p.vy = p.vy * 0.98 - 0.03;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life *= 0.975;
+                    ctx.fillStyle = `rgba(190, 20, 35, ${p.life})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, Math.max(0.2, p.r * p.life), 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                ctx.restore();
+
+                const cloudR = 20 + t * 100;
+                const cloudA = Math.max(0, 0.55 - t * 0.55);
+                ctx.fillStyle = `rgba(180, 15, 35, ${cloudA})`;
+                ctx.beginPath();
+                ctx.arc(sx, sy, cloudR, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (t < 1) {
+                    deathAnimationId = requestAnimationFrame(step);
+                } else {
+                    deathAnimationId = 0;
+                    onDone();
+                }
+            };
+            deathAnimationId = requestAnimationFrame(step);
+        }
+
         window.addEventListener('mousemove', updateMousePos);
-        window.addEventListener('touchmove', updateMousePos, { passive: false });
-        window.addEventListener('touchstart', updateMousePos, { passive: false });
-
-        window.addEventListener('pointerdown', (e) => {
-            if (e.target.tagName === 'BUTTON') return;
-            if (gameState === 'PLAYING' && dashCooldown <= 0) {
-                updateMousePos(e); 
-                mouse.worldX = mouse.screenX + camera.x;
-                mouse.worldY = mouse.screenY + camera.y;
-
-                const dx = mouse.worldX - player.x;
-                const dy = mouse.worldY - player.y;
-                const dist = Math.hypot(dx, dy);
-                
-                if (dist > 5) {
-                    player.dash(dx / dist, dy / dist);
-                    applyDashSkill();
-                    dashCooldown = MAX_DASH_CD;
-                    waveRings.push(new WaveRing(player.x, player.y));
-                    triggerShake(5); 
+        window.addEventListener('touchstart', (e) => {
+            if (!isTouchDevice) return;
+            if (gameState !== 'PLAYING') return;
+            if (e.target.closest('button')) return;
+            for (const t of e.changedTouches) {
+                const isLeftSide = t.clientX < width * 0.56;
+                if (isLeftSide && mobileMoveTouchId === null) {
+                    mobileMoveTouchId = t.identifier;
+                    updateMobileStickFromPoint(t.clientX, t.clientY);
+                } else {
+                    tryDashForward();
                 }
             }
+            e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isTouchDevice) return;
+            if (gameState !== 'PLAYING') return;
+            for (const t of e.changedTouches) {
+                if (t.identifier === mobileMoveTouchId) {
+                    updateMobileStickFromPoint(t.clientX, t.clientY);
+                }
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchend', (e) => {
+            if (!isTouchDevice) return;
+            if (gameState !== 'PLAYING') return;
+            for (const t of e.changedTouches) {
+                if (t.identifier === mobileMoveTouchId) {
+                    resetMobileStick();
+                }
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchcancel', () => {
+            if (!isTouchDevice) return;
+            if (gameState !== 'PLAYING') return;
+            resetMobileStick();
+        }, { passive: false });
+
+        window.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'touch') return;
+            if (e.target.closest('button')) return;
+            updateMousePos(e);
+            tryDashAt(mouse.screenX, mouse.screenY);
         });
 
         function checkWorldBounds(obj) {
@@ -763,6 +1179,9 @@
             selectedCharacterId = characterId;
             selectedCharacterIndex = Math.max(0, SELECTABLE_CHARACTER_IDS.indexOf(characterId));
             renderCharacterSelection();
+            if (socket && socket.connected && gameState === 'PLAYING') {
+                socket.emit('player:join', { name: playerName, characterId: selectedCharacterId });
+            }
         }
 
         function moveCharacterSelection(step) {
@@ -770,6 +1189,9 @@
             selectedCharacterIndex = (selectedCharacterIndex + step + total) % total;
             selectedCharacterId = SELECTABLE_CHARACTER_IDS[selectedCharacterIndex];
             renderCharacterSelection();
+            if (socket && socket.connected && gameState === 'PLAYING') {
+                socket.emit('player:join', { name: playerName, characterId: selectedCharacterId });
+            }
         }
 
         characterTrack.addEventListener('click', (e) => {
@@ -780,6 +1202,7 @@
 
         characterPrev.addEventListener('click', () => moveCharacterSelection(-1));
         characterNext.addEventListener('click', () => moveCharacterSelection(1));
+        connectSocket();
 
         function getEnemyAnchor(enemy) {
             if (enemy.segments && enemy.segments.length > 0) return enemy.segments[0];
@@ -2469,6 +2892,231 @@
         let bloodEffects = [];
         let interactablePearls = [];
 
+        function connectSocket() {
+            if (!SOCKET_ENABLED || socket) return;
+            socket = io();
+
+            socket.on('connect', () => {
+                socketId = socket.id;
+                socket.emit('player:status', { active: false });
+            });
+
+            socket.on('players:init', (players) => {
+                remotePlayers.clear();
+                remoteRenderPlayers.clear();
+                Object.keys(players || {}).forEach((id) => {
+                    if (id === socketId) return;
+                    const p = players[id];
+                    if (p.active === false || (typeof p.hp === 'number' && p.hp <= 0)) return;
+                    remotePlayers.set(id, {
+                        id,
+                        name: p.name || 'ผู้เล่น',
+                        characterId: p.characterId || 'default',
+                        angle: p.angle || 0,
+                        hp: typeof p.hp === 'number' ? p.hp : 100,
+                        maxHp: typeof p.maxHp === 'number' ? p.maxHp : 100,
+                        x: p.x || 0,
+                        y: p.y || 0,
+                        tx: p.x || 0,
+                        ty: p.y || 0
+                    });
+                });
+            });
+
+            socket.on('player:update', (p) => {
+                if (!p || !p.id || p.id === socketId) return;
+                if (p.active === false || (typeof p.hp === 'number' && p.hp <= 0)) {
+                    remotePlayers.delete(p.id);
+                    remoteRenderPlayers.delete(p.id);
+                    biteCooldownByTarget.delete(p.id);
+                    return;
+                }
+                const prev = remotePlayers.get(p.id);
+                if (prev) {
+                    prev.name = p.name || prev.name;
+                    prev.characterId = p.characterId || prev.characterId;
+                    prev.angle = typeof p.angle === 'number' ? p.angle : prev.angle;
+                    prev.hp = typeof p.hp === 'number' ? p.hp : prev.hp;
+                    prev.maxHp = typeof p.maxHp === 'number' ? p.maxHp : prev.maxHp;
+                    prev.tx = typeof p.x === 'number' ? p.x : prev.tx;
+                    prev.ty = typeof p.y === 'number' ? p.y : prev.ty;
+                } else {
+                    remotePlayers.set(p.id, {
+                        id: p.id,
+                        name: p.name || 'ผู้เล่น',
+                        characterId: p.characterId || 'default',
+                        angle: p.angle || 0,
+                        hp: typeof p.hp === 'number' ? p.hp : 100,
+                        maxHp: typeof p.maxHp === 'number' ? p.maxHp : 100,
+                        x: p.x || 0,
+                        y: p.y || 0,
+                        tx: p.x || 0,
+                        ty: p.y || 0
+                    });
+                }
+            });
+
+            socket.on('player:remove', (id) => {
+                remotePlayers.delete(id);
+                remoteRenderPlayers.delete(id);
+                biteCooldownByTarget.delete(id);
+            });
+
+            socket.on('player:bitten', (hit) => {
+                if (!hit || !player || gameState !== 'PLAYING') return;
+                const dmg = Math.max(6, Math.min(40, Number(hit.damage) || 10));
+                const canTake = shieldTimer <= 0 && damageCooldown <= 0 && player.dashTimer <= 0;
+                if (!canTake) return;
+
+                const prevHp = hp;
+                takeDamage(dmg);
+                if (hp < prevHp) {
+                    const hx = Number(hit.ax) || player.x;
+                    const hy = Number(hit.ay) || player.y;
+                    const dx = player.x - hx;
+                    const dy = player.y - hy;
+                    const dist = Math.max(1, Math.hypot(dx, dy));
+                    const kb = 10 + dmg * 0.35;
+                    player.vx += (dx / dist) * kb;
+                    player.vy += (dy / dist) * kb;
+                }
+            });
+        }
+
+        function emitLocalPlayer(timestamp) {
+            if (!socket || !socket.connected || !player || gameState !== 'PLAYING') return;
+            if (timestamp - lastNetSendAt < NET_TICK_MS) return;
+            lastNetSendAt = timestamp;
+            socket.emit('player:update', {
+                x: player.x,
+                y: player.y,
+                angle: player.angle,
+                active: true,
+                hp,
+                maxHp: 100,
+                characterId: player.characterId,
+                name: playerName
+            });
+        }
+
+        function drawRemotePlayers(ctx) {
+            remotePlayers.forEach((rp) => {
+                rp.x += (rp.tx - rp.x) * REMOTE_LERP;
+                rp.y += (rp.ty - rp.y) * REMOTE_LERP;
+                let renderPlayer = remoteRenderPlayers.get(rp.id);
+                if (!renderPlayer || renderPlayer.characterId !== rp.characterId) {
+                    renderPlayer = new Player(rp.x, rp.y, rp.characterId);
+                    renderPlayer.hasEnergyTail = false;
+                    renderPlayer.historyLength = 0;
+                    remoteRenderPlayers.set(rp.id, renderPlayer);
+                }
+
+                renderPlayer.x = rp.x;
+                renderPlayer.y = rp.y;
+                renderPlayer.angle = rp.angle || 0;
+                renderPlayer.vx = 0;
+                renderPlayer.vy = 0;
+                renderPlayer.animFrame = frameCount;
+                renderPlayer.dashTimer = 0;
+                renderPlayer.particles.length = 0;
+                renderPlayer.history.length = 0;
+
+                const prevShield = shieldTimer;
+                shieldTimer = 0;
+                renderPlayer.draw(ctx);
+                shieldTimer = prevShield;
+
+                const maxHp = Math.max(1, rp.maxHp || 100);
+                const currentHp = Math.max(0, Math.min(maxHp, rp.hp ?? 100));
+                const hpRatio = currentHp / maxHp;
+
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.65)';
+                ctx.fillRect(rp.x - 26, rp.y - 32, 52, 6);
+                ctx.fillStyle = 'rgba(0, 255, 170, 0.9)';
+                ctx.fillRect(rp.x - 26, rp.y - 32, 52 * hpRatio, 6);
+                ctx.strokeStyle = 'rgba(200,255,255,0.65)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(rp.x - 26, rp.y - 32, 52, 6);
+
+                ctx.font = '14px Mali';
+                ctx.fillStyle = 'rgba(230,255,255,0.95)';
+                ctx.textAlign = 'center';
+                ctx.fillText(rp.name || 'ผู้เล่น', rp.x, rp.y - 38);
+                ctx.font = '11px Mali';
+                ctx.fillStyle = 'rgba(190,245,255,0.9)';
+                ctx.fillText(`(${Math.round(rp.x / 10)}, ${Math.round(rp.y / 10)})`, rp.x, rp.y - 48);
+                ctx.restore();
+            });
+        }
+
+        function tryBiteRemotePlayers() {
+            if (!socket || !socket.connected || !player || gameState !== 'PLAYING') return;
+
+            remotePlayers.forEach((rp) => {
+                const lastHit = biteCooldownByTarget.get(rp.id) || -99999;
+                if (frameCount - lastHit < BITE_COOLDOWN_FRAMES) return;
+
+                const dx = rp.x - player.x;
+                const dy = rp.y - player.y;
+                const dist = Math.hypot(dx, dy);
+                const targetCfg = CHARACTER_PRESETS[rp.characterId] || CHARACTER_PRESETS.default;
+                const targetSize = targetCfg.hitSize || 18;
+                const hitDist = player.size + targetSize + 6;
+                if (dist > hitDist) return;
+
+                const biteDamage = player.dashTimer > 0 ? 26 : 12;
+                socket.emit('player:bite', {
+                    targetId: rp.id,
+                    damage: biteDamage,
+                    ax: player.x,
+                    ay: player.y
+                });
+                biteCooldownByTarget.set(rp.id, frameCount);
+            });
+        }
+
+        function drawMinimap() {
+            resizeMinimapCanvas();
+            const w = minimapCanvas.clientWidth;
+            const h = minimapCanvas.clientHeight;
+            minimapCtx.clearRect(0, 0, w, h);
+
+            minimapCtx.fillStyle = 'rgba(0, 18, 36, 0.82)';
+            minimapCtx.fillRect(0, 0, w, h);
+
+            minimapCtx.strokeStyle = 'rgba(120, 230, 255, 0.45)';
+            minimapCtx.lineWidth = 1;
+            minimapCtx.strokeRect(0.5, 0.5, w - 1, h - 1);
+
+            const worldW = WORLD_MAX_X - WORLD_MIN_X;
+            const worldH = WORLD_BOTTOM - WORLD_TOP;
+            const mapX = (x) => ((x - WORLD_MIN_X) / worldW) * w;
+            const mapY = (y) => ((y - WORLD_TOP) / worldH) * h;
+
+            const selfX = mapX(player.x);
+            const selfY = mapY(player.y);
+
+            minimapCtx.fillStyle = 'rgba(255, 245, 150, 0.9)';
+            minimapCtx.beginPath();
+            minimapCtx.arc(selfX, selfY, 4.5, 0, Math.PI * 2);
+            minimapCtx.fill();
+
+            remotePlayers.forEach((rp) => {
+                const x = mapX(rp.x);
+                const y = mapY(rp.y);
+                minimapCtx.fillStyle = 'rgba(255, 95, 95, 0.95)';
+                minimapCtx.beginPath();
+                minimapCtx.arc(x, y, 3.6, 0, Math.PI * 2);
+                minimapCtx.fill();
+            });
+
+            minimapCtx.fillStyle = 'rgba(210, 250, 255, 0.9)';
+            minimapCtx.font = '11px Mali';
+            minimapCtx.textAlign = 'left';
+            minimapCtx.fillText('มินิแมพ', 6, 14);
+        }
+
         function scoreMultiplier() { return frenzyTimer > 0 ? 2 : 1; }
         function triggerShake(intensity) { shakeIntensity = Math.max(shakeIntensity, intensity); }
 
@@ -2504,6 +3152,33 @@
             } else {
                 statusDisplay.style.display = 'none';
             }
+
+            const remoteList = Array.from(remotePlayers.values())
+                .map((rp) => {
+                    const dx = rp.x - player.x;
+                    const dy = rp.y - player.y;
+                    const dist = Math.round(Math.hypot(dx, dy) / 10);
+                    const hpPct = Math.round((Math.max(0, rp.hp ?? 100) / Math.max(1, rp.maxHp ?? 100)) * 100);
+                    return {
+                        name: rp.name || 'ผู้เล่น',
+                        dist,
+                        hpPct,
+                        x: Math.round((rp.x || 0) / 10),
+                        y: Math.round((rp.y || 0) / 10)
+                    };
+                })
+                .sort((a, b) => a.dist - b.dist)
+                .slice(0, 4);
+            if (remoteList.length > 0) {
+                remotePosDisplay.innerHTML = remoteList
+                    .map((r) => `${r.name} | HP ${r.hpPct}% | ${r.dist}m | (${r.x}, ${r.y})`)
+                    .join('<br>');
+                remotePosDisplay.style.display = 'block';
+            } else {
+                remotePosDisplay.style.display = 'none';
+            }
+            minimapWrap.style.display = 'block';
+            drawMinimap();
         }
 
         function takeDamage(amount) {
@@ -2534,23 +3209,30 @@
         }
 
         function gameOver() {
-            gameState = 'GAME_OVER';
+            if (gameState !== 'PLAYING') return;
+            gameState = 'DYING';
+            if (socket && socket.connected) socket.emit('player:status', { active: false });
             finalScoreText.innerText = `คุณเก็บแสงสว่างได้: ${score} คะแนน`;
-            
-            scoreDisplay.style.display = 'none';
-            depthDisplay.style.display = 'none';
-            distanceDisplay.style.display = 'none';
-            statusDisplay.style.display = 'none';
-            hpContainer.style.display = 'none';
-            dashContainer.style.display = 'none';
-            
-            gameOverScreen.style.display = 'flex';
+            resetMobileStick();
+            updateMobileUiVisibility();
+            settingsMenu.style.display = 'none';
+            setPlayingHudVisibility(false);
+            gameOverScreen.style.display = 'none';
+            cancelAnimationFrame(animationId);
+            runDeathDissolve(() => showMainLobby(true));
         }
 
         function initGame() {
             const startX = 500;
             const startY = 0; 
             player = new Player(startX, startY, selectedCharacterId);
+            resetMobileStick();
+            connectSocket();
+            lastNetSendAt = 0;
+            if (socket && socket.connected) {
+                socket.emit('player:join', { name: playerName, characterId: selectedCharacterId });
+                socket.emit('player:status', { active: true });
+            }
             
             monsters = [];
             for (let i = 0; i < 20; i++) monsters.push(new Monster());
@@ -2609,18 +3291,17 @@
             frenzyTimer = 0;
             shakeIntensity = 0;
             dashCooldown = 0;
-            
-            scoreDisplay.style.display = 'block';
-            depthDisplay.style.display = 'block';
-            distanceDisplay.style.display = 'block';
-            hpContainer.style.display = 'block';
-            dashContainer.style.display = 'block';
+            setPlayingHudVisibility(true);
             updateHud();
             
             startScreen.style.display = 'none';
             gameOverScreen.style.display = 'none';
+            settingsMenu.style.display = 'none';
+            lobbyMessage.textContent = '';
+            startBtn.textContent = 'เริ่มดำดิ่ง';
             
             gameState = 'PLAYING';
+            updateMobileUiVisibility();
             lastFrameTime = 0;
             loop();
         }
@@ -2663,6 +3344,7 @@
 
             mouse.worldX = mouse.screenX + camera.x;
             mouse.worldY = mouse.screenY + camera.y;
+            updateMobileTarget();
 
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             drawBackground(ctx, width, height);
@@ -2804,6 +3486,9 @@
 
             player.update();
             player.draw(ctx);
+            drawRemotePlayers(ctx);
+            tryBiteRemotePlayers();
+            emitLocalPlayer(timestamp);
             const isMegalodonDash = player.dashTimer > 0 && player.characterId === 'megalodon';
 
             for (let i = jellyfishes.length - 1; i >= 0; i--) {
@@ -3230,9 +3915,22 @@
 
         startBtn.addEventListener('click', initGame);
         restartBtn.addEventListener('click', initGame);
+        settingsBtn.addEventListener('click', () => {
+            if (gameState !== 'PLAYING') return;
+            settingsMenu.style.display = 'block';
+        });
+        closeSettingsBtn.addEventListener('click', () => {
+            settingsMenu.style.display = 'none';
+        });
+        backHomeBtn.addEventListener('click', () => {
+            settingsMenu.style.display = 'none';
+            showMainLobby(false);
+        });
 
         resize();
         renderCharacterSelection();
+        updateMobileUiVisibility();
+        resetMobileStick();
         initStartScreen();
 
     </script>
